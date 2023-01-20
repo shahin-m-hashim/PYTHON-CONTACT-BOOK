@@ -37,9 +37,7 @@ To use this program, you will need to have Python installed on your computer. Yo
 * Clone the repository to your local machine 
 * Copy code and run it on a browser- git clone https://github.com/shahin-m-hashim/PYTHON-CONTACT-BOOK
 * Or You can simply download the zip file and use it.
-
-### On Windows,Mac or Linux 
-* Navigate to the project directory
+* Navigate to the downloaded directory
 * Open up the terminal
 * Type python filename.py or py filename.py to run the program
 * Alternatively you can simply use any application like pycharm,vscode etc
