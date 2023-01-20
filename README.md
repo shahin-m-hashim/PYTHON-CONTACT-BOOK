@@ -35,7 +35,7 @@ This Python program was written for learning and improving knowledge on OOPs, da
 To use this program, you will need to have Python installed on your computer. You can download it from the official website if you do not already have it.
 
 * Clone the repository to your local machine 
-* Copy code and run it on a browser- git clone https://github.com/YOUR_USERNAME/contact-book.git
+* Copy code and run it on a browser- git clone https://github.com/shahin-m-hashim/PYTHON-CONTACT-BOOK
 * Or You can simply download the zip file and use it.
 
 ### On Windows,Mac or Linux 
