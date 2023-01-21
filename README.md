@@ -30,6 +30,19 @@ This Python program was written for learning and improving knowledge on OOPs, da
 * The program does not have a UI interface, all the interactions are done through the command line
 * The program does not handle database storage, all the contacts are stored in memory and will be lost once the program is closed.
 * The program does not provide a way to permanently save the contacts, they need to be exported manually to be saved.
+* The program does not have a feature to sort or filter the contacts, making it difficult to navigate through a large number of contacts.
+
+# CONTACT BOOK UI (Unfinished)
+This Python program now includes a UI interface using the tkinter library, allowing for a more user-friendly experience. The program allows the user to add new contacts with name, phone number, email, address and job, remove existing contacts, update existing contacts, search for a specific contact by name and list all contacts. The program also includes validation for inputs such as phone number and email, ensuring that the data entered is in the correct format. However, it still does not handle database storage and the contacts will be lost once the program is closed. Additionally, there is no option to permanently save the contacts, they need to be exported manually. This version of the program is more suited for real-world use and easy to interact with.
+
+## Drawbacks
+This Python program was written for learning and improving knowledge on UI interface provided by python's Tkinter library.
+* The program does not have proper resizing of the UI interface, the buttons and labels are misaligned.
+* The program does not have a responsive design, the layout may not adjust well for different screen sizes and when the window is resized.
+* The program uses in-memory storage for contacts, meaning that the contacts will be lost once the program is closed.
+* The program does not provide a way to permanently save the contacts, they need to be exported manually to be saved.
+* The program does not have a feature to import or export contacts, the contacts need to be manually entered or copied.
+* The program does not have a feature to sort or filter the contacts, making it difficult to navigate through a large number of contacts.
 
 ## Getting Started
 To use this program, you will need to have Python installed on your computer. You can download it from the official website if you do not already have it.
@@ -39,6 +52,7 @@ To use this program, you will need to have Python installed on your computer. Yo
 * Or You can simply download the zip file and use it.
 * Navigate to the downloaded directory
 * Open up the terminal
+* For the UI to work you should have tkinter library installed, to install : pip install tk
 * Type python filename.py or py filename.py to run the program
 * Alternatively you can simply use any application like pycharm,vscode etc
 
