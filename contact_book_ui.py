@@ -17,6 +17,17 @@ class ContactBook:
     def add_contact(self, name, phone_number, email,address,job):
         self.contacts.append(Contact(name, phone_number, email,address,job))
 
+    def update_contact(self, name, contact):
+        existing_contact = self.search_contact(name)
+        if existing_contact:
+            existing_contact.name = contact.name
+            existing_contact.phone_number = contact.phone_number
+            existing_contact.email = contact.email
+            existing_contact.address = contact.address
+            existing_contact.job = contact.job
+        else:
+            self.contacts.append(contact)
+
     def check_contact_exists(self, name):
         for contact in self.contacts:
             if contact.name == name:
@@ -36,26 +47,114 @@ class ContactBook:
                 return
         messagebox.showerror('Error', 'Contact not found')
 
-
-    def update_contact(self, name, contact):
-        for c in self.contacts:
-            if c.name == name:
-                c.name = contact.name
-                c.phone = contact.phone
-                c.email = contact.email
-                c.address = contact.address
-                c.job = contact.job
-                return
-        messagebox.showerror('Error', 'Contact not found')
-
     def list_contacts(self):
         if not self.contacts:
             messagebox.showerror('Error', 'No contacts found')
+            return []
         else:
-            contact_list = ''
+            return self.contacts
+
+class ListContactsWindow:
+    def __init__(self, master, contact_book):
+        self.master = master
+        self.contact_book = contact_book
+        self.contacts = self.contact_book.list_contacts()
+
+        if self.contacts:
+            self.master.title("Contact List")
+            self.master.geometry("500x500")
+            self.listbox = tk.Listbox(self.master, width=60, height=20)
+            self.listbox.pack(pady=10)
+            self.listbox.config(font=("Helvetica", 12))
+            self.listbox.config(bg='#F0F8FF')
+
             for i, contact in enumerate(self.contacts):
-                contact_list += str(i+1) + '. ' + contact.name + '\n'
-            messagebox.showinfo('Contact List', contact_list)
+                self.listbox.insert(tk.END, "")
+                self.listbox.insert(tk.END, f"Contact {i+1}:")
+                self.listbox.insert(tk.END, f"Name: {contact.name}")
+                self.listbox.insert(tk.END, f"Phone Number: {contact.phone_number}")
+                self.listbox.insert(tk.END, f"Email: {contact.email}")
+                self.listbox.insert(tk.END, f"Address: {contact.address}")
+                self.listbox.insert(tk.END, f"Job: {contact.job}\n")     
+
+class UpdateContactWindow:
+    def __init__(self, master, contact_book, name):
+        self.master = master
+        self.name = name
+        self.contact_book = contact_book
+        self.contact = self.contact_book.search_contact(name)
+
+        if not self.contact:
+            tk.messagebox.showerror("Error", "No contact found with that name.")
+            self.master.destroy()
+        else:
+            self.create_widgets()
+
+    def create_widgets(self):
+            self.master.title("Update Contact")
+            self.master.geometry("850x450")
+            self.name_label = tk.Label(self.master, text='Name:')
+            self.name_label.grid(row=0, column=0, pady=5)
+            self.name_label.config(font=super)
+            self.name_entry = tk.Entry(self.master, width=50)
+            self.name_entry.insert(0, self.contact.name) # set the current name as the value in the entry widget
+            self.name_entry.grid(row=0, column=1,pady=5)
+
+            self.phone_label = tk.Label(self.master, text='Phone:')
+            self.phone_label.grid(row=1, column=0,pady=5)
+            self.phone_label.config(font=super)
+            self.phone_entry = tk.Entry(self.master, width=50 )
+            self.phone_entry.insert(0, self.contact.phone_number) # set the current phone number as the value in the entry widget
+            self.phone_entry.grid(row=1, column=1,pady=5)
+
+            self.email_label = tk.Label(self.master, text='Email:')
+            self.email_label.grid(row=2, column=0,pady=5)
+            self.email_label.config(font=super)
+            self.email_entry = tk.Entry(self.master, width=50)
+            self.email_entry.insert(0, self.contact.email) # set the current email as the value in the entry widget
+            self.email_entry.grid(row=2, column=1,pady=5)
+
+            self.address_label = tk.Label(self.master, text='Address:')
+            self.address_label.grid(row=3, column=0,pady=5)
+            self.address_label.config(font=super)
+            self.address_entry = tk.Entry(self.master, width=50)
+            self.address_entry.insert(0, self.contact.address) # set the current address as the value in the entry widget
+            self.address_entry.grid(row=3, column=1,pady=5)
+
+            self.job_label = tk.Label(self.master, text='Job:')
+            self.job_label.grid(row=4, column=0,pady=5)
+            self.job_label.config(font=super)
+            self.job_entry = tk.Entry(self.master, width=50)
+            self.job_entry.insert(0, self.contact.job) # set the current job as the value in the entry widget
+            self.job_entry.grid(row=4, column=1,pady=5)
+
+            
+            self.save_button = tk.Button(self.master, text='Save', command=self.save_update, width=10, padx=5)
+            self.save_button.grid(row=8, column=2, padx=20)
+
+    def save_update(self):
+        new_name = self.name_entry.get()
+        new_phone = self.phone_entry.get()
+        new_email = self.email_entry.get()
+        new_address = self.address_entry.get()
+        new_job = self.job_entry.get()
+
+        # validate phone number, email and address
+        if not validate_integer(new_phone):
+            tk.messagebox.showerror("Error", "Invalid phone number.")
+            return
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", new_email):
+            tk.messagebox.showerror("Error", "Invalid email address.")
+            return
+
+        # update the contact's information
+        self.contact.name = new_name
+        self.contact.phone_number = new_phone
+        self.contact.email = new_email
+        self.contact.address = new_address
+        self.contact.job = new_job
+        tk.messagebox.showinfo("Success", "Contact updated.")
+        self.master.destroy()
 
 def validate_integer(number):
     try:
@@ -106,7 +205,7 @@ class App:
         self.add_button.grid(row=5, column=0,padx=10,pady=20)
         self.add_button.config(background='#7CFC00',highlightbackground='black', bd=3)
 
-        self.list_button = tk.Button(self.root, text='List Contacts ', command=self.list_contacts,width=30)
+        self.list_button = tk.Button(self.root, text='List Contacts ', command=self.open_list_contacts_window,width=30)
         self.list_button.grid(row=5, column=1,pady=20)
         self.list_button.config(background='#7CFC00',highlightbackground='black', bd=3)
 
@@ -156,6 +255,10 @@ class App:
         job = self.job_entry.get()
         self.contact_book.add_contact(name, phone_number, email, address, job)
         messagebox.showinfo("Success", "Contact added successfully!")
+    
+    def open_list_contacts_window(self):
+        list_contacts_window = tk.Toplevel(self.root)
+        ListContactsWindow(list_contacts_window, self.contact_book)
 
     def remove_contact(self):
         name = self.remove_entry.get()
@@ -180,20 +283,9 @@ class App:
                 messagebox.showerror("Error", "Contact not found!")
 
     def update_contact(self):
-        name = self.name_entry.get()
-        phone = self.phone_entry.get()
-        email = self.email_entry.get()
-        address = self.address_entry.get()
-        job = self.job_entry.get()
-        if name and phone and email:
-            contact = Contact(name, phone, email, address, job)
-            self.contact_book.update_contact(name, contact)
-            messagebox.showinfo('Success', 'Contact updated')
-        else:
-            messagebox.showerror('Error', 'Name, Phone and Email are required')
-
-    def list_contacts(self):
-        self.contact_book.list_contacts()
+        name = self.update_entry.get()
+        update_contact_info = tk.Toplevel(self.root)
+        UpdateContactWindow(update_contact_info, self.contact_book, name)
 
     def run(self):
         self.root.mainloop()
