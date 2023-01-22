@@ -67,8 +67,7 @@ Once the program is running, you will be prompted with a menu that allows you to
 * To list all contacts, select option 5.
 * To exit the program, select option 6.
 
-ui interface program
-
+ui interface program-
 Once the program is running, you will be prompted with a tkinter-based UI interface that allows you to perform different actions on your contacts.
 
 * To add a new contact, you can fill in the required information in the fields provided, such as name, phone number, email, address, and job. After you fill in the required information, can click on the "Add Contact" button to add the contact to your contact list.
