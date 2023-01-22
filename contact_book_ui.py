@@ -58,7 +58,7 @@ class ListContactsWindow:
     def __init__(self, master, contact_book):
         self.master = master
         self.contact_book = contact_book
-        self.contacts = self.contact_book.list_contacts()
+        self.contacts = self.contact_book.contacts
 
         if self.contacts:
             self.master.title("Contact List")
@@ -83,54 +83,47 @@ class UpdateContactWindow:
         self.name = name
         self.contact_book = contact_book
         self.contact = self.contact_book.search_contact(name)
+        
+        self.master.title("Update Contact")
+        self.master.geometry("850x450")
+        self.name_label = tk.Label(self.master, text='Name:')
+        self.name_label.grid(row=0, column=0, pady=5)
+        self.name_label.config(font=super)
+        self.name_entry = tk.Entry(self.master, width=50)
+        self.name_entry.insert(0, self.contact.name) # set the current name as the value in the entry widget
+        self.name_entry.grid(row=0, column=1,pady=5)
 
-        if not self.contact:
-            tk.messagebox.showerror("Error", "No contact found with that name.")
-            self.master.destroy()
-        else:
-            self.create_widgets()
+        self.phone_label = tk.Label(self.master, text='Phone:')
+        self.phone_label.grid(row=1, column=0,pady=5)
+        self.phone_label.config(font=super)
+        self.phone_entry = tk.Entry(self.master, width=50 )
+        self.phone_entry.insert(0, self.contact.phone_number) # set the current phone number as the value in the entry widget
+        self.phone_entry.grid(row=1, column=1,pady=5)
 
-    def create_widgets(self):
-            self.master.title("Update Contact")
-            self.master.geometry("850x450")
-            self.name_label = tk.Label(self.master, text='Name:')
-            self.name_label.grid(row=0, column=0, pady=5)
-            self.name_label.config(font=super)
-            self.name_entry = tk.Entry(self.master, width=50)
-            self.name_entry.insert(0, self.contact.name) # set the current name as the value in the entry widget
-            self.name_entry.grid(row=0, column=1,pady=5)
+        self.email_label = tk.Label(self.master, text='Email:')
+        self.email_label.grid(row=2, column=0,pady=5)
+        self.email_label.config(font=super)
+        self.email_entry = tk.Entry(self.master, width=50)
+        self.email_entry.insert(0, self.contact.email) # set the current email as the value in the entry widget
+        self.email_entry.grid(row=2, column=1,pady=5)
 
-            self.phone_label = tk.Label(self.master, text='Phone:')
-            self.phone_label.grid(row=1, column=0,pady=5)
-            self.phone_label.config(font=super)
-            self.phone_entry = tk.Entry(self.master, width=50 )
-            self.phone_entry.insert(0, self.contact.phone_number) # set the current phone number as the value in the entry widget
-            self.phone_entry.grid(row=1, column=1,pady=5)
+        self.address_label = tk.Label(self.master, text='Address:')
+        self.address_label.grid(row=3, column=0,pady=5)
+        self.address_label.config(font=super)
+        self.address_entry = tk.Entry(self.master, width=50)
+        self.address_entry.insert(0, self.contact.address) # set the current address as the value in the entry widget
+        self.address_entry.grid(row=3, column=1,pady=5)
 
-            self.email_label = tk.Label(self.master, text='Email:')
-            self.email_label.grid(row=2, column=0,pady=5)
-            self.email_label.config(font=super)
-            self.email_entry = tk.Entry(self.master, width=50)
-            self.email_entry.insert(0, self.contact.email) # set the current email as the value in the entry widget
-            self.email_entry.grid(row=2, column=1,pady=5)
+        self.job_label = tk.Label(self.master, text='Job:')
+        self.job_label.grid(row=4, column=0,pady=5)
+        self.job_label.config(font=super)
+        self.job_entry = tk.Entry(self.master, width=50)
+        self.job_entry.insert(0, self.contact.job) # set the current job as the value in the entry widget
+        self.job_entry.grid(row=4, column=1,pady=5)
 
-            self.address_label = tk.Label(self.master, text='Address:')
-            self.address_label.grid(row=3, column=0,pady=5)
-            self.address_label.config(font=super)
-            self.address_entry = tk.Entry(self.master, width=50)
-            self.address_entry.insert(0, self.contact.address) # set the current address as the value in the entry widget
-            self.address_entry.grid(row=3, column=1,pady=5)
-
-            self.job_label = tk.Label(self.master, text='Job:')
-            self.job_label.grid(row=4, column=0,pady=5)
-            self.job_label.config(font=super)
-            self.job_entry = tk.Entry(self.master, width=50)
-            self.job_entry.insert(0, self.contact.job) # set the current job as the value in the entry widget
-            self.job_entry.grid(row=4, column=1,pady=5)
-
-            
-            self.save_button = tk.Button(self.master, text='Save', command=self.save_update, width=10, padx=5)
-            self.save_button.grid(row=8, column=2, padx=20)
+        
+        self.save_button = tk.Button(self.master, text='Save', command=self.save_update, width=10, padx=5)
+        self.save_button.grid(row=8, column=2, padx=20)
 
     def save_update(self):
         new_name = self.name_entry.get()
@@ -257,8 +250,13 @@ class App:
         messagebox.showinfo("Success", "Contact added successfully!")
     
     def open_list_contacts_window(self):
-        list_contacts_window = tk.Toplevel(self.root)
-        ListContactsWindow(list_contacts_window, self.contact_book)
+        if not self.contact_book.contacts:
+            messagebox.showerror('Error', 'No contacts found')
+            return []
+        else:
+            list_contacts_window = tk.Toplevel(self.root)
+            ListContactsWindow(list_contacts_window, self.contact_book)
+            return self.contact_book.contacts
 
     def remove_contact(self):
         name = self.remove_entry.get()
@@ -284,8 +282,12 @@ class App:
 
     def update_contact(self):
         name = self.update_entry.get()
-        update_contact_info = tk.Toplevel(self.root)
-        UpdateContactWindow(update_contact_info, self.contact_book, name)
+        self.contact = self.contact_book.search_contact(name)
+        if not self.contact:
+            messagebox.showerror("Error", "No contact found with that name.")
+        else:
+            update_contact_info = tk.Toplevel(self.root)
+            UpdateContactWindow(update_contact_info, self.contact_book, name)
 
     def run(self):
         self.root.mainloop()
