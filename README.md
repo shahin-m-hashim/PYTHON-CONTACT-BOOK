@@ -32,16 +32,15 @@ This Python program was written for learning and improving knowledge on OOPs, da
 * The program does not provide a way to permanently save the contacts, they need to be exported manually to be saved.
 * The program does not have a feature to sort or filter the contacts, making it difficult to navigate through a large number of contacts.
 
-# CONTACT BOOK UI (Unfinished)
+# CONTACT BOOK UI 
 This Python program now includes a UI interface using the tkinter library, allowing for a more user-friendly experience. The program allows the user to add new contacts with name, phone number, email, address and job, remove existing contacts, update existing contacts, search for a specific contact by name and list all contacts. The program also includes validation for inputs such as phone number and email, ensuring that the data entered is in the correct format. However, it still does not handle database storage and the contacts will be lost once the program is closed. Additionally, there is no option to permanently save the contacts, they need to be exported manually. This version of the program is more suited for real-world use and easy to interact with.
+
+This script defines a Contact class that stores information about a contact, including their name, phone number, email, address, and job. The script also defines a validate_integer function that checks whether a given input can be converted to an integer. The program uses two main classes: the Contact class and the ContactBook class. The Contact class is used to store the contact information, while the ContactBook class is used to manage a list of contacts. The ContactBook class has several methods that allow the user to add, update, search, and remove contacts from the list. Additionally, the program has two other classes: ListContactsWindow and UpdateContactWindow. The ListContactsWindow class opens a tkinter window that displays the list of contacts, while the UpdateContactWindow class opens a tkinter window that allows the user to update the information of a specific contact.
 
 ## Drawbacks
 This Python program was written for learning and improving knowledge on UI interface provided by python's Tkinter library.
-* The program does not have proper resizing of the UI interface, the buttons and labels are misaligned.
-* The program does not have a responsive design, the layout may not adjust well for different screen sizes and when the window is resized.
+* The program does not have proper resizing of the UI interface.
 * The program uses in-memory storage for contacts, meaning that the contacts will be lost once the program is closed.
-* The program does not provide a way to permanently save the contacts, they need to be exported manually to be saved.
-* The program does not have a feature to import or export contacts, the contacts need to be manually entered or copied.
 * The program does not have a feature to sort or filter the contacts, making it difficult to navigate through a large number of contacts.
 
 ## Getting Started
