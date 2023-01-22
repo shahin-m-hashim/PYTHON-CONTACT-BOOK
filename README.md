@@ -56,6 +56,8 @@ To use this program, you will need to have Python installed on your computer. Yo
 * Alternatively you can simply use any application like pycharm,vscode etc
 
 ## Usage
+
+command line program -
 Once the program is running, you will be prompted with a menu that allows you to perform different actions on your contacts.
 
 * To add a new contact, select option 1 and enter the required information.
@@ -64,6 +66,20 @@ Once the program is running, you will be prompted with a menu that allows you to
 * To search for a contact, select option 4 and enter the name of the contact you are looking for.
 * To list all contacts, select option 5.
 * To exit the program, select option 6.
+
+ui interface program
+
+Once the program is running, you will be prompted with a tkinter-based UI interface that allows you to perform different actions on your contacts.
+
+* To add a new contact, you can fill in the required information in the fields provided, such as name, phone number, email, address, and job. After you fill in the required information, can click on the "Add Contact" button to add the contact to your contact list.
+
+* To remove a contact, you can enter the name of the contact you wish to remove in the field provided. Then click on the "Remove" button.
+
+* To update a contact, you can enter the name of the contact you wish to update in the field provided, then fill in the new information in the fields provided and click "Update" button.
+
+* To search for a contact, you can enter the name of the contact you are looking for in the field provided, and then click on the "Search" button.
+
+* To list all contacts, you can click on the "List Contacts" button.
 
 ## Note
 The program will prompt you for a valid input for phone number and email.
