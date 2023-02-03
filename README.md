@@ -18,6 +18,8 @@ The code also uses the python library 're' to check if the email provided by the
 
 The code is well organized, easy to read, and it covers all the required functionality for a contact book application.
 
+![An example image](https://github.com/shahin-m-hashim/PYTHON-CONTACT-BOOK/blob/main/contact_book_terminal.png)
+
 ## Features
 * Add new contacts with name, phone number, email, address and job.
 * Remove existing contacts
@@ -36,6 +38,8 @@ This Python program was written for learning and improving knowledge on OOPs, da
 This Python program now includes a UI interface using the tkinter library, allowing for a more user-friendly experience. The program allows the user to add new contacts with name, phone number, email, address and job, remove existing contacts, update existing contacts, search for a specific contact by name and list all contacts. The program also includes validation for inputs such as phone number and email, ensuring that the data entered is in the correct format. However, it still does not handle database storage and the contacts will be lost once the program is closed. Additionally, there is no option to permanently save the contacts, they need to be exported manually. This version of the program is more suited for real-world use and easy to interact with.
 
 This script defines a Contact class that stores information about a contact, including their name, phone number, email, address, and job. The script also defines a validate_integer function that checks whether a given input can be converted to an integer. The program uses two main classes: the Contact class and the ContactBook class. The Contact class is used to store the contact information, while the ContactBook class is used to manage a list of contacts. The ContactBook class has several methods that allow the user to add, update, search, and remove contacts from the list. Additionally, the program has two other classes: ListContactsWindow and UpdateContactWindow. The ListContactsWindow class opens a tkinter window that displays the list of contacts, while the UpdateContactWindow class opens a tkinter window that allows the user to update the information of a specific contact.
+
+![An example image](https://github.com/shahin-m-hashim/PYTHON-CONTACT-BOOK/blob/main/contact_book_ui.png)
 
 ## Drawbacks
 This Python program was written for learning and improving knowledge on UI interface provided by python's Tkinter library.
@@ -88,7 +92,7 @@ The program will notify you if the contact does not exist when trying to remove 
 If you find a bug or have an idea for an improvement, please open an issue or create a pull request.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see <a href="https://github.com/shahin-m-hashim/PYTHON-CONTACT-BOOK/blob/main/LICENSE">LICENSE.md</a>
 
 ## Acknowledgments
 Enjoy the Contact book and keep your contacts organized(Well Logically)
